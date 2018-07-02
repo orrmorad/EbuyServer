@@ -15,6 +15,6 @@ namespace EbuyProject.Models
 		public CreditCardType Type { get; set; }
 		public int Prefix { get; set; }
 
-		public virtual ICollection<Transaction> Transactions { get; set; }
+		public virtual ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
 	}
 }

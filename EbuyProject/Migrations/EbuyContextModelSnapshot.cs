@@ -324,29 +324,21 @@ namespace EbuyProject.Migrations
 
                     b.Property<string>("CardExpire");
 
-                    b.Property<int>("CardId");
-
-                    b.Property<int>("CardNumber");
+                    b.Property<int?>("CardId");
 
                     b.Property<string>("CardOwner");
 
                     b.Property<int>("CreditCardNumber");
 
-                    b.Property<int>("CreditCardType");
-
                     b.Property<DateTime>("DeliveryDate");
 
                     b.Property<int?>("ModeId");
 
-                    b.Property<int?>("ShipmenDetailsId");
-
                     b.Property<double>("ShipmentCost");
 
-                    b.Property<int>("ShipmentDetailsId");
+                    b.Property<int?>("ShipmentDetailsId");
 
-                    b.Property<int>("ShipmentOption");
-
-                    b.Property<int>("ShipmentOptionId");
+                    b.Property<int?>("ShipmentOptionId");
 
                     b.Property<double>("TotalCost");
 
@@ -356,7 +348,7 @@ namespace EbuyProject.Migrations
 
                     b.HasIndex("ModeId");
 
-                    b.HasIndex("ShipmenDetailsId");
+                    b.HasIndex("ShipmentDetailsId");
 
                     b.HasIndex("ShipmentOptionId");
 
@@ -434,8 +426,7 @@ namespace EbuyProject.Migrations
                 {
                     b.HasOne("EbuyProject.Models.CreditCardTypes", "CreditCardTypes")
                         .WithMany("Transactions")
-                        .HasForeignKey("CardId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CardId");
 
                     b.HasOne("EbuyProject.Models.DeliveryModes", "DeliveryMode")
                         .WithMany("Transactions")
@@ -443,12 +434,11 @@ namespace EbuyProject.Migrations
 
                     b.HasOne("EbuyProject.Models.ShipmenDetails", "ShipmenDetails")
                         .WithMany("Transactions")
-                        .HasForeignKey("ShipmenDetailsId");
+                        .HasForeignKey("ShipmentDetailsId");
 
                     b.HasOne("EbuyProject.Models.ShipmentOptions", "ShipmentOptions")
                         .WithMany("Transactions")
-                        .HasForeignKey("ShipmentOptionId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ShipmentOptionId");
                 });
         }
     }

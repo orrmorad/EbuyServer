@@ -4,21 +4,22 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EbuyProject.Migrations
 {
-    public partial class addedaddress : Migration
+    public partial class addedtotalcosttransaction : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Address",
-                table: "Authors",
-                nullable: true);
+            migrationBuilder.AddColumn<double>(
+                name: "TotalCost",
+                table: "Transactions",
+                nullable: false,
+                defaultValue: 0.0);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Address",
-                table: "Authors");
+                name: "TotalCost",
+                table: "Transactions");
         }
     }
 }

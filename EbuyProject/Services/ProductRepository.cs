@@ -73,7 +73,13 @@ namespace EbuyProject.Services
 
 		public void CreateTransaction(Transaction transaction)
 		{
-			ctx.Transactions.Add(transaction);
+			var delivery = ctx.DeliveryModes.Where(del => del.ModeId == transaction.DeliveryMode.ModeId).FirstOrDefault();
+			delivery.Transactions.Add(transaction);
+			ctx.SaveChanges();
+			var shipment = ctx.ShipmentOptions.Where(s => s.ShipmentOptionId == transaction.ShipmentOptions.ShipmentOptionId).FirstOrDefault();
+			var cardType = ctx.CreditCardTypes.Where(c => c.Type == transaction.CreditCardTypes.Type).FirstOrDefault();
+			shipment.Transactions.Add(transaction);
+			cardType.Transactions.Add(transaction);
 			ctx.SaveChanges();
 		}
 	}

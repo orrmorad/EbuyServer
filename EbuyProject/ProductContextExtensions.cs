@@ -331,7 +331,7 @@ namespace EbuyProject
 				var member = new ClubMember()
 				{
 					City = "Tel Aviv",
-					MemberId= 2009558205,
+					MemberId = 2009558205,
 					//Customer = new Customer()
 					//{
 					//	CustomerId = 2009558205,
@@ -357,6 +357,34 @@ namespace EbuyProject
 				context.ShipmentPrices.AddRange(_shipmentPrice);
 				context.SaveChanges();
 			}
+
+			if (!context.CreditCardTypes.Any())
+			{
+				var card1 = new CreditCardTypes()
+				{
+					Type = CreditCardType.AmericanExpress,
+					Prefix = 1234
+				};
+
+				var card2 = new CreditCardTypes()
+				{
+					Type = CreditCardType.Mastercard,
+					Prefix = 5326
+				};
+
+				var card3 = new CreditCardTypes()
+				{
+					Type = CreditCardType.Visa,
+					Prefix = 5678
+				};
+				var cards = new List<CreditCardTypes>()
+				{
+					card1,card2,card3
+				};
+				context.CreditCardTypes.AddRange(cards);
+				context.SaveChanges();
+			}
+
 			#endregion
 		}
 	}

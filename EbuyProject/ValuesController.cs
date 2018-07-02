@@ -75,7 +75,7 @@ namespace EbuyProject
 		//[HttpPost("{creditCardType}/{deliveryMode}/{deliveryDate}/{shipmentOption}/{shipmentCost}/{totalCost}/{cardNumber}/{cardExpire}/{cardOwner}")]
 		[HttpPost]
 		[ActionName("CreateTransaction")]
-		public void CreateTransaction(int transaction)
+		public void CreateTransaction([FromBody]object transaction)
 		{
 			var transactionString = transaction.ToString();
 			var trans = JsonConvert.DeserializeObject<Transaction>(transactionString);

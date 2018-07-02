@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace EbuyProject.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -294,19 +294,15 @@ namespace EbuyProject.Migrations
                     TransactionId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CardExpire = table.Column<string>(nullable: true),
-                    CardId = table.Column<int>(nullable: false),
+                    CardId = table.Column<int>(nullable: true),
                     CardNumber = table.Column<int>(nullable: false),
                     CardOwner = table.Column<string>(nullable: true),
                     CreditCardNumber = table.Column<int>(nullable: false),
-                    CreditCardType = table.Column<int>(nullable: false),
                     DeliveryDate = table.Column<DateTime>(nullable: false),
                     ModeId = table.Column<int>(nullable: true),
-                    ShipmenDetailsId = table.Column<int>(nullable: true),
                     ShipmentCost = table.Column<double>(nullable: false),
-                    ShipmentDetailsId = table.Column<int>(nullable: false),
-                    ShipmentOption = table.Column<int>(nullable: false),
-                    ShipmentOptionId = table.Column<int>(nullable: false),
-                    TotalCost = table.Column<double>(nullable: false)
+                    ShipmentDetailsId = table.Column<int>(nullable: true),
+                    ShipmentOptionId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -316,7 +312,7 @@ namespace EbuyProject.Migrations
                         column: x => x.CardId,
                         principalTable: "CreditCardTypes",
                         principalColumn: "CardId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Transactions_DeliveryModes_ModeId",
                         column: x => x.ModeId,
@@ -324,8 +320,8 @@ namespace EbuyProject.Migrations
                         principalColumn: "ModeId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Transactions_ShipmenDetails_ShipmenDetailsId",
-                        column: x => x.ShipmenDetailsId,
+                        name: "FK_Transactions_ShipmenDetails_ShipmentDetailsId",
+                        column: x => x.ShipmentDetailsId,
                         principalTable: "ShipmenDetails",
                         principalColumn: "ShipmenDetailsId",
                         onDelete: ReferentialAction.Restrict);
@@ -334,7 +330,7 @@ namespace EbuyProject.Migrations
                         column: x => x.ShipmentOptionId,
                         principalTable: "ShipmentOptions",
                         principalColumn: "ShipmentOptionId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -454,9 +450,9 @@ namespace EbuyProject.Migrations
                 column: "ModeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Transactions_ShipmenDetailsId",
+                name: "IX_Transactions_ShipmentDetailsId",
                 table: "Transactions",
-                column: "ShipmenDetailsId");
+                column: "ShipmentDetailsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Transactions_ShipmentOptionId",
